@@ -16,7 +16,7 @@ A **Star Schema** was designed using a central `Fact_Sales` table connected to m
 
 ## 🎯 Business Objectives
 
-The main objectives of this project were to:
+The main objectives of this project are to:
 
 - Analyze overall profit performance and trends over time.
 - Identify the most and least profitable products.
@@ -36,10 +36,8 @@ The Excel Data Model follows a **Star Schema architecture**.
 
 ### Fact Table
 
-**Fact_Sales**
-
+**`Fact_Sales`**  
 Contains transactional-level business data:
-
 - Row ID
 - Order ID
 - Order Date
@@ -53,190 +51,140 @@ Contains transactional-level business data:
 
 ### Dimension Tables
 
-**Dim_Customers**
-- Customer ID
-- Customer Name
-- Segment
-
-**Dim_Date**
-- Order Date
-- Year
-- Month
-- Quarter
-- Day of Week
-
-**Dim_Product**
-- Product ID
-- Category
-- Sub-Category
-- Product Name
-
-**Dim_Region**
-- Country
-- City
-- State
-- Postal Code
-- Region
-
-**Dim_Shipping**
-- Ship Date
-- Ship Mode
+- **`Dim_Customers`**: Customer ID, Customer Name, Segment
+- **`Dim_Date`**: Order Date, Year, Month, Quarter, Day of Week
+- **`Dim_Product`**: Product ID, Category, Sub-Category, Product Name
+- **`Dim_Region`**: Country, City, State, Postal Code, Region
+- **`Dim_Shipping`**: Ship Date, Ship Mode
 
 ### Schema Structure
 
-```text
                     Dim_Customers
-                         │
-                         │ 1 : *
-                         ▼
-Dim_Date ────────► Fact_Sales ◄──────── Dim_Product
-    │                  │  ▲
-    │                  │  │
-    │                  │  │
-Dim_Shipping ─────────┘  │
-                         │
-                         ▼
-                    Dim_Region
+                          │
+                          │ 1
+                          ▼ *
+Dim_Date ─────────► Fact_Sales ◄───────── Dim_Product
+  (1)     *            ▲            *        (1)
+                       │ *
+                       │
+                       │ 1
+                  Dim_Shipping
+                       ▲
+                       │ *
+                       │ 1
+                  Dim_Region
+
+---
+
 ## 🛠️ Tools & Technologies
-Microsoft Excel 2021
-Power Query
-Excel Data Model
-PivotTables
-PivotCharts
-Slicers
-Calculated Measures
-Conditional Formatting
-Data Visualization
-Business Intelligence
-Profitability Analysis
-## 📈 Dashboard
 
-The dashboard provides an interactive overview of Superstore profitability and allows users to explore the data through filters, KPIs, and visualizations.
+- **Microsoft Excel 2021** (Power Query, Data Model, PivotTables, PivotCharts, Slicers, Conditional Formatting)
+- **Data Modeling** (Star Schema, Dimensional Modeling, Relational Relationships)
+- **Business Intelligence & Analytics** (Profitability Analysis, Visual Exploratory Data Analysis)
 
-Key Analysis Areas
-Profit Overview
-Profit Trends Over Time
-Profit by Customer Segment
-Product Performance
-Bottom 10 Products
-Discount Analysis
-Regional Performance
-Category & Sub-Category Analysis
-Shipping Analysis
+---
 
-Interactive Slicers allow users to dynamically filter the dashboard and investigate different business dimensions.
+## 📈 Dashboard Overview
 
-## 💡 Key Business Questions
+The dashboard provides an interactive overview of Superstore profitability and allows users to explore the data through dynamic filters, key performance indicators (KPIs), and targeted visualizations.
 
-The dashboard was designed to answer questions such as:
+### Key Analysis Areas
+- **Profit Overview:** Aggregate metrics and profitability trends over time.
+- **Customer Segment Analysis:** Comparative profitability across Consumer, Corporate, and Home Office segments.
+- **Product Performance:** Top-performing items vs. Bottom 10 products generating negative profit.
+- **Discount Impact:** Analyzing how varying discount rates affect overall net margins.
+- **Geographic & Regional Performance:** Breakdown across states, cities, and sales regions.
+- **Category & Sub-Category Performance:** Hierarchy drill-downs across product lines.
+- **Shipping Mode Breakdown:** Evaluating performance variations across shipping speeds.
 
-Which products generate the highest profit?
-Which products generate negative profit?
-Which customer segments contribute the most profit?
-How does profitability vary across categories and sub-categories?
-Which regions show stronger or weaker profitability?
-Are higher discounts associated with lower profit?
-How does profit change over time?
-Which products may require further investigation?
-How does shipping mode relate to business performance?
+> **Data Note:** The dataset used in this project does not contain a `Sales` revenue field. Therefore, the analysis focuses primarily on **Profit**, **Discount**, **Quantity**, and related dimensional attributes rather than revenue-based KPIs (e.g., Total Sales or Profit Margin %).
+
+---
+
+## 💡 Key Business Questions Addressed
+
+1. Which products generate the highest profit, and which yield significant losses?
+2. Which customer segments contribute the most to the net profit margin?
+3. How does profitability vary across product categories and sub-categories?
+4. Are higher discount levels directly correlated with profit erosion or negative profit margins?
+5. How does profitability fluctuate over monthly and yearly time horizons?
+6. Does shipping mode selection impact product profitability?
+
+---
 
 ## 🔎 Key Insights
 
-The analysis focuses on identifying patterns that can support business-oriented decision making, including:
+- **High- and Low-Profit Products:** Clear identification of core profit drivers versus items running at a continuous loss.
+- **Discount Thresholds:** Uncovering patterns where discount rates above specific thresholds lead directly to negative margins.
+- **Regional & Segment Variances:** Pinpointing geographically underperforming zones and high-value customer groups.
 
-Identifying high- and low-profit products and sub-categories.
-Comparing profitability across customer segments.
-Detecting products with negative profit.
-Examining discount patterns and their association with profitability.
-Identifying regional differences in profit performance.
-Understanding category and sub-category contribution to overall profit.
-Exploring differences in performance across shipping modes.
-
-Data Note: The version of the dataset used in this project does not contain a Sales field. Therefore, the analysis focuses primarily on Profit, Discount, Quantity, and related dimensions, rather than sales-based KPIs such as Total Sales or Profit Margin.
+---
 
 ## 🔄 Project Workflow
 
 Raw Dataset
-     │
-     ▼
-Data Cleaning & Preparation
-     │
-     ▼
-Power Query
-     │
-     ▼
-Star Schema Data Model
-     │
-     ├── Fact_Sales
-     ├── Dim_Customers
-     ├── Dim_Date
-     ├── Dim_Product
-     ├── Dim_Region
-     └── Dim_Shipping
-     │
-     ▼
-PivotTables & Calculated Measures
-     │
-     ▼
-Exploratory Analysis
-     │
-     ▼
-Interactive Visualizations
-     │
-     ▼
-Dashboard
-     │
-     ▼
-Business Insights
+    │
+    ▼
+Data Cleaning & Preparation (Power Query)
+    │
+    ▼
+Star Schema Data Modeling (Excel Data Model)
+    │
+    ├── Fact_Sales
+    ├── Dim_Customers
+    ├── Dim_Date
+    ├── Dim_Product
+    ├── Dim_Region
+    └── Dim_Shipping
+    │
+    ▼
+Calculated Measures & PivotTables
+    │
+    ▼
+Exploratory Data Analysis (EDA)
+    │
+    ▼
+Interactive Dashboard Construction
+    │
+    ▼
+Business Insights & Actionable Recommendations
+
+---
 
 ## 📁 Repository Structure
 
 Superstore-Excel-Dashboard/
 │
-├── Superstore_Dashboard.xlsx
-├── README.md
+├── Superstore_Dashboard.xlsx     # Interactive Excel Workbook & Data Model
+├── README.md                     # Project documentation
 │
-└── screenshots/
+└── screenshots/                  # Dashboard and Data Model visual assets
     ├── dashboard.png
     └── star_schema.png
 
+---
+
 ## 🎓 Skills Demonstrated
 
-This project demonstrates practical experience in:
+- Data Cleaning, ETL, and Transformation with **Power Query**.
+- **Dimensional Data Modeling** (Star Schema architecture, primary/foreign keys, cardinality).
+- Advanced **Excel Data Modeling** and **PivotTable/PivotChart** design.
+- **Interactive Dashboard UI/UX Design** using slicers, custom layouts, and conditional formatting.
+- Formulating business-driven queries and translating data patterns into actionable insights.
 
-Data Cleaning & Transformation
-Power Query
-Dimensional Data Modeling
-Star Schema Design
-Excel Data Model
-PivotTables & PivotCharts
-Calculated Measures
-Interactive Dashboard Development
-Data Visualization
-Profitability Analysis
-Business Question Formulation
-Data-driven Insights
-
-## 🚀 Project Highlights
-
-Data Modeling
-
-Designed a structured Star Schema with a central fact table and multiple dimension tables to support flexible analytical reporting and filtering.
-
-Data Analysis
-
-Used PivotTables, calculated measures, and dimensional attributes to investigate profitability across multiple business perspectives.
-
-Dashboard Design
-
-Built an interactive dashboard using KPIs, charts, conditional formatting, and slicers to make the analysis easy to explore and understand.
-
-Business Analysis
-
-Translated data patterns into business-focused questions and insights related to products, discounts, customer segments, categories, regions, and shipping.
+---
 
 ## 👩‍💻 Author
 
-Malak Sherif 
-
+**Malak Sherif**  
 Data Analyst
+
+### Connect With Me
+
+- 💼 LinkedIn: [Malak Sherif](https://www.linkedin.com/in/malak-sherif-b03138357)
+
+---
+
+⭐ **If you found this project interesting, feel free to explore the repository and share your feedback!**
+
+#DataAnalytics #Excel #BusinessIntelligence #DataModeling #PowerQuery #DataVisualization
